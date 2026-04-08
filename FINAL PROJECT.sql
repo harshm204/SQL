@@ -136,8 +136,7 @@ SELECT * FROM Students
 WHERE EnrollmentDate > '2022-12-31';
 
 -- Courses offered by Mathematics department (limit 5)
-SELECT c.*
-FROM Courses c
+SELECT c.*FROM Courses c
 JOIN Departments d ON c.DepartmentID = d.DepartmentID
 WHERE d.DepartmentName = 'Mathematics'
 LIMIT 5;
@@ -149,16 +148,14 @@ GROUP BY CourseID
 HAVING COUNT(StudentID) > 5;
 
 -- Students enrolled in BOTH courses
-SELECT s.StudentID, s.FirstName, s.LastName
-FROM Students s
+SELECT s.StudentID, s.FirstName, s.LastName FROM Students s
 JOIN Enrollments e ON s.StudentID = e.StudentID
 WHERE e.CourseID IN (101, 102)
 GROUP BY s.StudentID
 HAVING COUNT(DISTINCT e.CourseID) = 2;
 
 -- Students enrolled in ANY of the two courses
-SELECT DISTINCT s.*
-FROM Students s
+SELECT DISTINCT s.* FROM Students s
 JOIN Enrollments e ON s.StudentID = e.StudentID
 WHERE e.CourseID IN (101, 102);
 
@@ -180,20 +177,17 @@ JOIN Enrollments e ON c.CourseID = e.CourseID
 GROUP BY d.DepartmentName; 
 
 -- INNER JOIN 
-SELECT s.FirstName, s.LastName, c.CourseName
-FROM Students s
+SELECT s.FirstName, s.LastName, c.CourseName FROM Students s
 INNER JOIN Enrollments e ON s.StudentID = e.StudentID
 INNER JOIN Courses c ON e.CourseID = c.CourseID;
 
 -- LEFT JOIN
-SELECT s.FirstName, s.LastName, c.CourseName
-FROM Students s
+SELECT s.FirstName, s.LastName, c.CourseName FROM Students s
 LEFT JOIN Enrollments e ON s.StudentID = e.StudentID
 LEFT JOIN Courses c ON e.CourseID = c.CourseID;
 
 -- Courses with more than 10 students
-SELECT *
-FROM Students
+SELECT * FROM Students
 WHERE StudentID IN (
     SELECT StudentID
     FROM Enrollments
